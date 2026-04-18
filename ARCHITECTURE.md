@@ -141,3 +141,8 @@ Final score is clamped to 0..100 and mapped to bands: Strong, Watch, High Cautio
 - Add new supply heuristics/signals in `src/supplyChainScanner.js`.
 - Tune trust-scoring weights in `src/cli.js`.
 - Expand AI fallback coverage in `src/aiExplainer.js`.
+
+## Related Docs
+
+- Flow and license-rule configuration: [FLOW_LICENSE_RULES.md](FLOW_LICENSE_RULES.md)
+- Setup and usage guide: [README.md](README.md)

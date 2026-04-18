@@ -106,6 +106,10 @@ cp .env.example .env
 
 Project internals are documented in [ARCHITECTURE.md](ARCHITECTURE.md), including Mermaid diagrams and component flow.
 
+### Flow and license-rule configuration
+
+Runtime flow and license-rule configuration are documented in [FLOW_LICENSE_RULES.md](FLOW_LICENSE_RULES.md), including Mermaid diagrams and rule-extension examples.
+
 ---
 
 ## Usage
