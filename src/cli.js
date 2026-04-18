@@ -162,6 +162,8 @@ program
       supplyChain: withSupplyChain,
     } = options;
 
+    // Current product behavior: enabling security also enables supply scan
+    // to provide a combined risk/trust perspective in one run.
     const withSupply = withSecurity || withSupplyChain;
 
     try {
@@ -195,7 +197,9 @@ program
 
       // ── Step 3: Security scan (npm audit) ───────────────────────────────────
       let secSummary = null;
-      let transitiveRows = []; // vulnerable packages not in the license list
+      // Synthetic rows for vulnerable packages that do not appear in the
+      // license scan list (usually transitive-only dependencies).
+      let transitiveRows = [];
       let supplySummary = null;
 
       if (withSecurity) {
@@ -313,6 +317,8 @@ program
       }
 
       // ── Step 5: AI license explanations ─────────────────────────────────────
+      // Explain risky/flagged packages by default; safe clean packages are
+      // included only when --explain-all is explicitly requested.
       const toExplain = withAI
         ? classified.filter(
             (p) =>
@@ -339,6 +345,8 @@ program
 
       // ── Step 6: Trust score and remediation suggestions ────────────────────
       const licenseSummary = buildLicenseSummary(classified);
+      // This call pre-populates mutable trustScore fields used for ordering
+      // remediation targets below.
       buildTrustDashboard(
         classified,
         transitiveRows,
@@ -417,6 +425,7 @@ program
       }
 
       // ── Step 7: Output ──────────────────────────────────────────────────────
+      // JSON mode is designed for CI/pipelines; terminal UI is skipped.
       if (asJson) {
         console.log(
           JSON.stringify(
@@ -435,6 +444,7 @@ program
         return;
       }
 
+      // Summary mode keeps high-level dashboards only.
       if (summaryOnly) {
         printLicenseSummaryBox(licenseSummary);
         if (secSummary) printSecuritySummaryBox(secSummary);
@@ -567,6 +577,7 @@ function printPackageTable(classified, transitiveRows = []) {
 
   const allRows = [...sorted, ...transitiveRows];
 
+  // Compute table widths from data to keep output aligned for mixed projects.
   const colName = Math.min(
     Math.max(...allRows.map((p) => p.name.length), 10),
     35,
@@ -1083,6 +1094,8 @@ function buildTrustDashboard(
 ) {
   const mergedRows = [...classified, ...transitiveRows];
 
+  // Intentionally mutates each row so trustScore is available to downstream
+  // ranking and remediation selection.
   for (const pkg of mergedRows) {
     pkg.trustScore = calculatePackageTrust(pkg);
   }
@@ -1148,6 +1161,8 @@ function pickRemediationTargets(classified, transitiveRows, limit = 5) {
 }
 
 function calculatePackageTrust(pkg) {
+  // Deterministic additive penalty model with caps to prevent one category
+  // from dominating the package trust score completely.
   const licensePenalty =
     pkg.risk === "HIGH_RISK" ? 45 : pkg.risk === "WARNING" ? 18 : 0;
 

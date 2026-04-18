@@ -2,6 +2,9 @@ import licenseChecker from "license-checker";
 import path from "path";
 import fs from "fs";
 
+// This module normalizes license-checker output into a predictable
+// dependency list used by the rest of the CLI pipeline.
+
 // ─── Types (JSDoc) ────────────────────────────────────────────────────────────
 
 /**
@@ -103,6 +106,8 @@ function normalizeVersionSpec(spec) {
  * @returns {ScannedPackage[]}
  */
 function buildDeclaredDependencyFallback(manifest) {
+  // If node_modules is unavailable, use declared dependencies so the
+  // scan can still provide a useful report instead of failing early.
   const merged = new Map();
   const sections = [manifest.dependencies, manifest.optionalDependencies];
 
@@ -184,6 +189,7 @@ function normalize(raw) {
  * // ]
  */
 export async function scanLicenses(projectPath = ".") {
+  // Parse manifest first so fallback paths can reuse it if needed.
   const resolvedPath = resolveProjectRoot(projectPath);
   const manifest = readProjectManifest(resolvedPath);
 
@@ -204,6 +210,8 @@ export async function scanLicenses(projectPath = ".") {
           // Provide a cleaner error message than the library's default
           const msg = err.message || String(err);
           if (msg.includes("No packages found")) {
+            // Treat this as an empty result so fallback logic can decide
+            // whether declared dependencies should be returned.
             return resolve({});
           }
           return reject(new Error(`License scan failed: ${msg}`));
@@ -215,10 +223,13 @@ export async function scanLicenses(projectPath = ".") {
 
   // ── Normalize and sort alphabetically by package name ─────────────────────
   const packages = normalize(raw).filter(
+    // Ignore the root project row when license-checker reports it.
     (pkg) => !isRootProjectPackage(pkg, manifest),
   );
 
   if (packages.length === 0) {
+    // Fallback mode: report declared dependencies with unknown licenses.
+    // This keeps scan output useful before npm install has been run.
     const declaredOnly = buildDeclaredDependencyFallback(manifest);
     if (declaredOnly.length > 0) {
       declaredOnly.sort((a, b) => a.name.localeCompare(b.name));
