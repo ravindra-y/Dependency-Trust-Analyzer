@@ -1,0 +1,29 @@
+{
+  "name": "ai-license-risk-analyzer",
+  "version": "1.0.0",
+  "description": "Analyze open-source license risks in your project using AI",
+  "type": "module",
+  "bin": {
+    "ai-license-risk-analyzer": "./bin/index.js"
+  },
+  "scripts": {
+    "start": "node bin/index.js"
+  },
+  "dependencies": {
+    "@google/genai": "^1.50.1",
+    "axios": "^1.6.0",
+    "chalk": "^5.3.0",
+    "commander": "^12.0.0",
+    "dotenv": "^17.4.2",
+    "license-checker": "^25.0.1"
+  },
+  "keywords": [
+    "license",
+    "risk",
+    "analyzer",
+    "ai",
+    "cli"
+  ],
+  "author": "",
+  "license": "MIT"
+}

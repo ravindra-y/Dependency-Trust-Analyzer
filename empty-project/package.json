@@ -1,0 +1,17 @@
+{
+  "name": "demo-vulnerable-app",
+  "version": "1.0.0",
+  "dependencies": {
+    "lodash": "^4.17.11",
+    "event-stream": "3.3.6",
+    "colors": "1.4.0",
+    "node-ipc": "9.2.1",
+    "eslint": "^8.0.0",
+    "axios": "^0.21.1",
+    "lodahs": "^1.0.0",
+    "mongose": "^1.0.0",
+    "crossenv": "^1.0.0",
+    "grunt-cli": "^1.4.3",
+    "angular": "^1.8.0"
+  }
+}
