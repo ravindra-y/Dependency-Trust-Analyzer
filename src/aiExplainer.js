@@ -3,7 +3,7 @@ import { GoogleGenAI } from "@google/genai";
 
 // ─── Config ───────────────────────────────────────────────────────────────────
 
-const GEMINI_API_KEY = process.env.GEMINI_API_KEY || "";
+const GEMINI_API_KEY = process.env.GEINI_API_KEY || "";
 
 // Lazy-initialise the client — only created when a key is present
 let _ai = null;
