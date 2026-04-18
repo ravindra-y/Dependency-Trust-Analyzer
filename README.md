@@ -1,4 +1,4 @@
-# 🔍 AI License Risk Analyzer
+#  AI License Risk Analyzer
 
 ```
   ╔══════════════════════════════════════════════════════╗
@@ -18,7 +18,7 @@
 
 ---
 
-## 🚀 What Is This?
+##  What Is This?
 
 Open-source licenses are everywhere, but not all of them play nicely with commercial or proprietary software. One GPL dependency buried in your `node_modules` can legally require you to open-source your entire product.
 
@@ -36,26 +36,26 @@ No configuration. No friction. Just run and know.
 
 ---
 
-## ✨ Features
+##  Features
 
 | Feature                           | Description                                                                    |
 | --------------------------------- | ------------------------------------------------------------------------------ |
-| 📦 **Dependency Scanning**        | Uses `license-checker` to scan all production dependencies                     |
-| 🏷️ **License Classification**     | Rule-based engine classifies licenses into `SAFE / WARNING / HIGH RISK`        |
-| 🔒 **Security Scan**              | Uses `npm audit` to detect known CVEs and severity breakdown                   |
-| 🧬 **Supply-Chain Heuristics**    | Flags typosquat-like names, OSV alerts, and lockfile integrity issues          |
-| 🛡️ **Unified Trust Dashboard**    | Produces overall trust score + lowest-trust package list                       |
-| 🤖 **AI Explanations**            | Calls Google Gemini API to explain risky licenses in plain English (≤20 words) |
-| 🛠️ **AI Remediation Suggestions** | Generates practical actions like replace/upgrade/pin/review for risky packages |
-| 🎨 **Rich Terminal UI**           | ASCII banner, aligned table, color-coded output, progress steps                |
-| 📊 **Summary Report**             | License + security + supply-chain + trust summaries with verdicts              |
-| 🔧 **Multiple Output Modes**      | Default table, `--summary` compact view, `--json` for pipelines                |
-| 🛡️ **Error Handling**             | Clear messages for missing paths, missing `package.json`, no `node_modules`    |
-| 🔌 **Offline Fallback**           | Works without an API key — uses curated hardcoded explanations                 |
+|  **Dependency Scanning**        | Uses `license-checker` to scan all production dependencies                     |
+|  **License Classification**     | Rule-based engine classifies licenses into `SAFE / WARNING / HIGH RISK`        |
+|  **Security Scan**              | Uses `npm audit` to detect known CVEs and severity breakdown                   |
+|  **Supply-Chain Heuristics**    | Flags typosquat-like names, OSV alerts, and lockfile integrity issues          |
+|  **Unified Trust Dashboard**    | Produces overall trust score + lowest-trust package list                       |
+|  **AI Explanations**            | Calls Google Gemini API to explain risky licenses in plain English (≤20 words) |
+|  **AI Remediation Suggestions** | Generates practical actions like replace/upgrade/pin/review for risky packages |
+|  **Rich Terminal UI**           | ASCII banner, aligned table, color-coded output, progress steps                |
+|  **Summary Report**             | License + security + supply-chain + trust summaries with verdicts              |
+|  **Multiple Output Modes**      | Default table, `--summary` compact view, `--json` for pipelines                |
+|  **Error Handling**             | Clear messages for missing paths, missing `package.json`, no `node_modules`    |
+|  **Offline Fallback**           | Works without an API key — uses curated hardcoded explanations                 |
 
 ---
 
-## 📦 Installation
+##  Installation
 
 ### Clone and install
 
@@ -92,7 +92,7 @@ Get a free key at [aistudio.google.com](https://aistudio.google.com).
 
 ---
 
-## 🛠️ Usage
+##  Usage
 
 ### Basic scan
 
@@ -162,7 +162,7 @@ Options:
 
 ---
 
-## 📋 Sample Output
+##  Sample Output
 
 ### Default scan
 
@@ -175,37 +175,37 @@ Options:
   Project  ./my-app
   Time     4/16/2026, 9:30:41 AM
 
-  ⏳  Scanning licenses ... ✔  42 packages found
-  ⚙️   Classifying risks  ... ✔  done
+    Scanning licenses ...   42 packages found
+     Classifying risks  ...   done
 
       Package              Version   License        Risk
   ─────────────────────────────────────────────────────────
-  ✖  some-old-lib         2.1.0     GPL-3.0        HIGH RISK
-  ⚠  weak-copyleft-pkg    1.0.0     LGPL-2.1       WARNING
+    some-old-lib         2.1.0     GPL-3.0        HIGH RISK
+    weak-copyleft-pkg    1.0.0     LGPL-2.1       WARNING
 
-  ✔  lodash               4.17.21   MIT            SAFE
-  ✔  axios                1.6.0     MIT            SAFE
-  ✔  chalk                5.3.0     MIT            SAFE
+    lodash               4.17.21   MIT            SAFE
+    axios                1.6.0     MIT            SAFE
+    chalk                5.3.0     MIT            SAFE
   ─────────────────────────────────────────────────────────
 
   Results Summary
   ────────────────────────────────────────
-  ✔   Safe          39   ███████████████░
-  ⚠   Warning        2   ░░░░░░░░░░░░░░░░
-  ✖   High Risk      1   ░░░░░░░░░░░░░░░░
+     Safe          39   ███████████████░
+     Warning        2   ░░░░░░░░░░░░░░░░
+     High Risk      1   ░░░░░░░░░░░░░░░░
   ────────────────────────────────────────
   Total          42
 
-  ✖  1 high-risk license(s) detected. Review before shipping.
+    1 high-risk license(s) detected. Review before shipping.
 ```
 
 ### With `--ai` flag
 
 ```
-  ✖  some-old-lib         2.1.0     GPL-3.0        HIGH RISK
+    some-old-lib         2.1.0     GPL-3.0        HIGH RISK
        ↳ Strong copyleft. All derivatives must be GPL. Incompatible with closed-source.
 
-  ⚠  weak-copyleft-pkg   1.0.0     LGPL-2.1       WARNING
+    weak-copyleft-pkg   1.0.0     LGPL-2.1       WARNING
        ↳ Weak copyleft. Safe if used as a library. Modifications to the lib must be open.
 ```
 
@@ -214,18 +214,18 @@ Options:
 ```
   Results Summary
   ────────────────────────────────────────
-  ✔   Safe          39   ███████████████░
-  ⚠   Warning        2   ░░░░░░░░░░░░░░░░
-  ✖   High Risk      1   ░░░░░░░░░░░░░░░░
+     Safe          39   ███████████████░
+     Warning        2   ░░░░░░░░░░░░░░░░
+     High Risk      1   ░░░░░░░░░░░░░░░░
   ────────────────────────────────────────
   Total          42
 
-  ✖  1 high-risk license(s) detected. Review before shipping.
+    1 high-risk license(s) detected. Review before shipping.
 ```
 
 ---
 
-## 🏗️ Project Structure
+##  Project Structure
 
 ```
 ai-license-risk-analyzer/
@@ -244,21 +244,21 @@ ai-license-risk-analyzer/
 
 ---
 
-## 🧠 How Risk Classification Works
+##  How Risk Classification Works
 
 The engine uses a **keyword rule table** evaluated in priority order:
 
 | Risk           | Matched Licenses                                            | Why it matters                                    |
 | -------------- | ----------------------------------------------------------- | ------------------------------------------------- |
-| 🔴 `HIGH RISK` | `GPL-1/2/3`, `AGPL-1/3`                                     | Strong copyleft — forces your product open-source |
-| 🟡 `WARNING`   | `LGPL-*`, `MPL-2.0`, `EPL-*`, `EUPL`, `Unknown`             | Weak copyleft or unknown — review before shipping |
-| 🟢 `SAFE`      | `MIT`, `ISC`, `Apache-2.0`, `BSD-*`, `CC0-1.0`, `Unlicense` | Permissive — no significant restrictions          |
+|  `HIGH RISK` | `GPL-1/2/3`, `AGPL-1/3`                                     | Strong copyleft — forces your product open-source |
+|  `WARNING`   | `LGPL-*`, `MPL-2.0`, `EPL-*`, `EUPL`, `Unknown`             | Weak copyleft or unknown — review before shipping |
+|  `SAFE`      | `MIT`, `ISC`, `Apache-2.0`, `BSD-*`, `CC0-1.0`, `Unlicense` | Permissive — no significant restrictions          |
 
 > LGPL keywords are evaluated **before** GPL to prevent substring false-matches (`LGPL-3.0` containing `GPL-3.0`).
 
 ---
 
-## 📡 AI Integration
+##  AI Integration
 
 When `--ai` is passed, the tool calls [Google Gemini](https://aistudio.google.com) with this prompt:
 
@@ -268,7 +268,7 @@ When `--ai` is passed, the tool calls [Google Gemini](https://aistudio.google.co
 
 ---
 
-## 🔮 Future Improvements
+##  Future Improvements
 
 - [ ] **HTML / PDF report export** — shareable audit reports for teams
 - [ ] **CI/CD integration** — exit code `1` on `HIGH RISK`, GitHub Actions ready
@@ -281,7 +281,7 @@ When `--ai` is passed, the tool calls [Google Gemini](https://aistudio.google.co
 
 ---
 
-## 🤝 Contributing
+##  Contributing
 
 1. Fork the repo
 2. Create a feature branch: `git checkout -b feat/my-feature`
@@ -290,12 +290,12 @@ When `--ai` is passed, the tool calls [Google Gemini](https://aistudio.google.co
 
 ---
 
-## 📄 License
+##  License
 
-MIT © 2026 — Free to use, modify, and ship.
+MIT  2026 — Free to use, modify, and ship.
 
 ---
 
 <p align="center">
-  Built with ❤️ for developers who care about their supply chain.
+  Built with  for developers who care about their supply chain.
 </p>
